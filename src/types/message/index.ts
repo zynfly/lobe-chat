@@ -3,7 +3,7 @@ import { Translate } from '@/types/translate';
 
 import { LLMRoleType } from '../llm';
 import { BaseDataModel } from '../meta';
-import { ChatPluginPayload } from './tools';
+import { ChatPluginPayload, ChatToolPayload } from './tools';
 
 /**
  * 聊天消息错误对象
@@ -51,6 +51,7 @@ export interface ChatMessage extends BaseDataModel {
    */
   role: LLMRoleType;
   sessionId?: string;
+  tools?: ChatToolPayload[];
   /**
    * 保存到主题的消息
    */

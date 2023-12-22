@@ -4,3 +4,12 @@ export interface ChatPluginPayload {
   identifier: string;
   type: 'standalone' | 'default' | 'builtin';
 }
+
+export interface ChatToolPayload {
+  apiName: string;
+  arguments: string;
+  data?: string;
+  id: string;
+  identifier: string;
+  type: 'standalone' | 'default' | 'builtin';
+}
