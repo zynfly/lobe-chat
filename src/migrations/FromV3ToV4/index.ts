@@ -33,10 +33,10 @@ export class MigrationV3ToV4 implements Migration {
       languageModel: {
         ...res,
         azure,
-        ollama: this.migrateProvider(ollama),
+        ollama: ollama && this.migrateProvider(ollama),
         openai,
-        openrouter: this.migrateProvider(openrouter),
-        togetherai: this.migrateProvider(togetherai),
+        openrouter: openrouter && this.migrateProvider(openrouter),
+        togetherai: togetherai && this.migrateProvider(togetherai),
       },
     };
   };
