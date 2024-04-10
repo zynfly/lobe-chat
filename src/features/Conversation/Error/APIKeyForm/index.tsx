@@ -1,4 +1,6 @@
+import { OpenAI, OpenRouter, Together, ZeroOne } from '@lobehub/icons';
 import { Button } from 'antd';
+import { useTheme } from 'antd-style';
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Center, Flexbox } from 'react-layout-kit';
@@ -12,11 +14,9 @@ import GoogleForm from './Google';
 import GroqForm from './Groq';
 import MistralForm from './Mistral';
 import MoonshotForm from './Moonshot';
-import OpenAIForm from './OpenAI';
 import OpenRouterForm from './OpenRouter';
 import PerplexityForm from './Perplexity';
-import TogetherAIForm from './TogetherAI';
-import ZeroOneForm from './ZeroOne';
+import ProviderApiKeyForm from './ProviderApiKeyForm';
 import ZhipuForm from './Zhipu';
 
 interface APIKeyFormProps {
@@ -26,6 +26,7 @@ interface APIKeyFormProps {
 
 const APIKeyForm = memo<APIKeyFormProps>(({ id, provider }) => {
   const { t } = useTranslation('error');
+  const theme = useTheme();
 
   const [resend, deleteMessage] = useChatStore((s) => [s.internalResendMessage, s.deleteMessage]);
 
@@ -64,20 +65,40 @@ const APIKeyForm = memo<APIKeyFormProps>(({ id, provider }) => {
       }
 
       case ModelProvider.OpenRouter: {
-        return <OpenRouterForm />;
-      }
+        return (
+          <ProviderApiKeyForm
+            avatar={<OpenRouter color={OpenRouter.colorPrimary} size={56} />}
+            provider={ModelProvider.OpenRouter}
+          />
+        );      }
 
       case ModelProvider.TogetherAI: {
-        return <TogetherAIForm />;
+        return (
+          <ProviderApiKeyForm
+            avatar={<Together color={Together.colorPrimary} size={56} />}
+            provider={ModelProvider.TogetherAI}
+          />
+        );
       }
 
       case ModelProvider.ZeroOne: {
-        return <ZeroOneForm />;
+        return (
+          <ProviderApiKeyForm
+            avatar={<ZeroOne color={ZeroOne.colorPrimary} size={56} />}
+            provider={ModelProvider.ZeroOne}
+          />
+        );
       }
 
       default:
       case ModelProvider.OpenAI: {
-        return <OpenAIForm />;
+        return (
+          <ProviderApiKeyForm
+            avatar={<OpenAI color={theme.colorText} size={64} />}
+            provider={ModelProvider.OpenAI}
+            showEndpoint
+          />
+        );
       }
     }
   }, [provider]);
