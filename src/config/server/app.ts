@@ -6,6 +6,8 @@ declare global {
     interface ProcessEnv {
       ACCESS_CODE?: string;
 
+      POSTGRES_DATABASE_URL?: string;
+
       IMGUR_CLIENT_ID?: string;
 
       SITE_URL?: string;
@@ -38,6 +40,8 @@ export const getAppConfig = () => {
 
   return {
     ACCESS_CODES,
+
+    POSTGRES_DATABASE_URL: process.env.POSTGRES_DATABASE_URL,
 
     DEFAULT_AGENT_CONFIG: process.env.DEFAULT_AGENT_CONFIG || '',
 
