@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server';
 
 import { getServerConfig } from '@/config/server';
+import { auth } from '@/libs/next-auth';
 
-import { auth } from './app/api/auth/next-auth';
 import { OAUTH_AUTHORIZED } from './const/auth';
 
 export const config = {
-  matcher: '/api/:path*',
+  matcher: [
+    // include any files in the api or trpc folders that might have an extension
+    '/(api|trpc)(.*)',
+  ],
 };
+
 const defaultMiddleware = () => NextResponse.next();
 
 const withAuthMiddleware = auth((req) => {
